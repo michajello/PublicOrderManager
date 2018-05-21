@@ -5,12 +5,12 @@ import lombok.Getter;
 @Getter
 public enum OrderType {
     ANNOUNCEMENT_ABOUT_ORDER("ZP-400", 1, "Ogłoszenie o zamówieniu"),
-    SIMPLIFIED_ANNOUNCEMENT(null, 2, "Uproszczone ogłoszenie"),
+    SIMPLIFIED_ANNOUNCEMENT("ZP-401", 2, "Uproszczone ogłoszenie"),
     AWARD_OF_THE_CONTRACT(null, 3, "Udzielenie zamówienia"),
     ANNOUNCEMENT_OF_THE_COMPETITION(null, 4, "Ogłoszenie konkursu"),
     ANNOUNCEMENT_OF_THE_COMPETITION_RESULTS(null, 5, "Ogłoszenie wyników konkursu"),
     CHANGE_OF_THE_ANNOUNCEMENT(null, 6, "Zmiana ogłoszenia"),
-    INTENTION_TO_AWARD_A_CONTRACT(null, 7, "Zamiar zawarcia umowy");
+    INTENTION_TO_AWARD_A_CONTRACT("ZP-408", 7, "Zamiar zawarcia umowy");
 
 
     private final String symbol;
