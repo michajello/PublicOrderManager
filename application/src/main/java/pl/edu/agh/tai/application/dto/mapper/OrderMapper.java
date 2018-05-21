@@ -8,10 +8,11 @@ import pl.edu.agh.tai.dbmodel.entity.Orderer;
 
 import java.time.LocalDate;
 
+
 public class OrderMapper extends Mapper<Order, OrderDTO> {
 
     private final LocalDate missingDate = LocalDate.of(1, 1,1);
-    
+
     @Override
     public OrderDTO mapToDTO(Order object) {
         return OrderDTO.builder()
@@ -169,21 +170,8 @@ public class OrderMapper extends Mapper<Order, OrderDTO> {
                 .build();
     }
 
-    private Boolean parseBoolean(String s){
-        if (s == null){
-            return null;
-        }
-        return s.equals("1") || s.toLowerCase().equals("true");
-    }
-
-    private String booleanToString(Boolean b){
-        if (b == null) {
-            return null;
-        }
-        return b ? "1" : "0";
-    }
-
-    private String localDateToString(LocalDate date){
+    @Override
+    protected String localDateToString(LocalDate date) {
         if (date == null){
             return null;
         } else if (date.equals(missingDate)) {
@@ -193,7 +181,8 @@ public class OrderMapper extends Mapper<Order, OrderDTO> {
         }
     }
 
-    private LocalDate stringToLocalDate(String s){
+    @Override
+    protected LocalDate stringToLocalDate(String s) {
         if (s == null){
             return null;
         } else if (s.equals("")) {
@@ -202,5 +191,4 @@ public class OrderMapper extends Mapper<Order, OrderDTO> {
             return LocalDate.parse(s);
         }
     }
-    
 }
