@@ -3,7 +3,7 @@ package pl.edu.agh.tai.dbmodel.entity;
 import lombok.Getter;
 
 @Getter
-public enum OrderType {
+public enum DocumentType {
     ANNOUNCEMENT_ABOUT_ORDER("ZP-400", 1, "Ogłoszenie o zamówieniu"),
     SIMPLIFIED_ANNOUNCEMENT("ZP-401", 2, "Uproszczone ogłoszenie"),
     AWARD_OF_THE_CONTRACT(null, 3, "Udzielenie zamówienia"),
@@ -17,7 +17,7 @@ public enum OrderType {
     private final int id;
     private final String name;
 
-    OrderType(String symbol, int id, String name) {
+    DocumentType(String symbol, int id, String name) {
         this.symbol = symbol;
         this.id = id;
         this.name = name;
