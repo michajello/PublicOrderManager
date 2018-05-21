@@ -1,8 +1,6 @@
 package pl.edu.agh.tai.dbmodel.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +9,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Getter
+@Setter
 public class Order {
 
     @Id
@@ -23,9 +23,9 @@ public class Order {
     private Orderer orderer;
 
     @Column(name = "akcept")
-    private boolean akcept;
+    private Boolean akcept;
     @Column(name = "aukcja")
-    private boolean aukcja;
+    private Boolean aukcja;
     @Column(name = "czas")
     private LocalDate czas;
     @Column(name = "data_publikacji")
@@ -35,7 +35,7 @@ public class Order {
     @Column(name = "data_stop")
     private LocalDate dataStop;
     @Column(name = "dialog")
-    private boolean dialog;
+    private Boolean dialog;
     @Column(name = "dsz_www")
     private String dszWww;
     @Column(name = "dyn_www")
@@ -69,7 +69,7 @@ public class Order {
     @Column(name = "numer_zamowienia")
     private Integer numerZamowienia;
     @Column(name = "oferty_czesciowe")
-    private boolean ofertyCzesciowe;
+    private Boolean ofertyCzesciowe;
     @Column(name = "oferty_godz")
     private String ofertyGodz;
     @Column(name = "ogloszenie_bzp")
@@ -94,12 +94,12 @@ public class Order {
 //    private String rodzajeId;
 //    @Column(name = "rodzaje_nazwa")
 //    private String rodzajeNazwa;
-//    @Column(name = "sprawozdanie_calosc")
 
 
-    private boolean sprawozdanieCalosc;
+    @Column(name = "sprawozdanie_calosc")
+    private Boolean sprawozdanieCalosc;
     @Column(name = "sprawozdanie_lata_obrotowe")
-    private boolean sprawozdanieLataObrotowe;
+    private Boolean sprawozdanieLataObrotowe;
     @Column(name = "status_id")
     private String statusId;
     @Column(name = "termin")
@@ -127,11 +127,11 @@ public class Order {
 
 
     @Column(name = "uniewaznienie")
-    private boolean uniewaznienie;
+    private Boolean uniewaznienie;
     @Column(name = "uzupelniajace")
-    private boolean uzupelniajace;
+    private Boolean uzupelniajace;
     @Column(name = "wariant")
-    private boolean wariant;
+    private Boolean wariant;
 
     @Column(name = "wartosc_cena")
     private Long wartoscCena;
@@ -150,12 +150,12 @@ public class Order {
     private String wykonawcaStr;
 
     @Column(name = "zaliczka")
-    private boolean zaliczka;
+    private Boolean zaliczka;
     @Column(name = "zamowienie_ue")
-    private boolean zamowienieUe;
+    private Boolean zamowienieUe;
     @Column(name = "zmiana_ogloszenia")
-    private boolean zmianaOgloszenia;
+    private Boolean zmianaOgloszenia;
     @Column(name = "zmiana_umowy")
-    private boolean zmianaUmowy;
+    private Boolean zmianaUmowy;
 
 }
