@@ -1,16 +1,19 @@
 package pl.edu.agh.tai.dbmodel.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 
 @Builder
 @Getter
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Orderer {
 
     @Id

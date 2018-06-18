@@ -21,6 +21,8 @@ public abstract class Mapper<D, T> {
      */
     public abstract D mapToDAO(T object);
 
+    public abstract void mapToPersistedDAO(D dbObject, T dtoObject);
+
 
     protected Boolean parseBoolean(String s) {
         return s == null ? null : (s.equals("1") || s.toLowerCase().equals("true"));

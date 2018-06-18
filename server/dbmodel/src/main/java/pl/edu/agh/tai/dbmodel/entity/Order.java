@@ -1,6 +1,10 @@
 package pl.edu.agh.tai.dbmodel.entity;
 
 import lombok.*;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Type;
+import pl.edu.agh.tai.dbmodel.util.Hashable;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,14 +15,19 @@ import java.time.LocalDate;
 @Entity
 @Getter
 @Setter
-public class Order {
+@DynamicUpdate
+@DynamicInsert
+@Table(name = "order_table", indexes = {@Index(columnList = "order_id_from_rest_server", name="rest_id_idx")})
+public class Order implements Hashable {
 
     @Id
-//    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "order_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @Column(name = "order_id_from_rest_server")
+    private Long restId;
+
+    @ManyToOne/*(cascade = {CascadeType.PERSIST})*/
     @JoinColumn(name = "orderer_id")
     private Orderer orderer;
 
@@ -43,8 +52,8 @@ public class Order {
     @Column(name = "gmina_id")
     private Integer gminaId;
 
-//    @Column(name = "id")
-//    private String id;
+//    @Column(name = "restId")
+//    private String restId;
 
     @Column(name = "instytucja_id")
     private String instytucjaId;
@@ -63,6 +72,7 @@ public class Order {
     @Column(name = "liczba_wykonawcow")
     private Integer liczbaWykonawcow;
     @Column(name = "nazwa")
+    @Type(type="text")
     private String nazwa;
     @Column(name = "numer_biuletynu")
     private Integer numerBiuletynu;
@@ -79,8 +89,10 @@ public class Order {
     @Column(name = "pozycja")
     private String pozycja;
     @Column(name = "projekt_ue")
+    @Type(type="text")
     private String projektUe;
     @Column(name = "przedmiot")
+    @Type(type="text")
     private String przedmiot;
     @Column(name = "publikacja_obowiazkowa")
     private String publikacjaObowiazkowa;
@@ -109,7 +121,7 @@ public class Order {
     private String trybId;
     @Column(name = "tryby_id")
     private String trybyId;
-    @Column(name = "nazwa")
+    @Column(name = "tryby_nazwa")
     private String trybyNazwa;
 
     @Enumerated(EnumType.STRING)
@@ -157,5 +169,66 @@ public class Order {
     private Boolean zmianaOgloszenia;
     @Column(name = "zmiana_umowy")
     private Boolean zmianaUmowy;
+
+    private String hash;
+
+
+    @Override
+    public String[] getItemsUsedInHash() {
+        return new String[]{
+                akcept != null ? akcept.toString(): ""
+                ,aukcja != null ? aukcja.toString(): ""
+                ,czas != null ? czas.toString(): ""
+                ,dataPublikacji != null ? dataPublikacji.toString(): ""
+                ,dataPublikacjiZamowienia != null ? dataPublikacjiZamowienia.toString(): ""
+                ,dataStop != null ? dataStop.toString(): ""
+                ,dialog != null ? dialog.toString(): ""
+                ,dszWww != null ? dszWww.toString(): ""
+                ,dynWww != null ? dynWww.toString(): ""
+                ,gminaId != null ? gminaId.toString(): ""
+                , restId != null ? restId.toString(): ""
+                ,instytucjaId != null ? instytucjaId.toString(): ""
+                ,kodPocztowyId != null ? kodPocztowyId.toString(): ""
+                ,kryteriumKod != null ? kryteriumKod.toString(): ""
+                ,liczbaCzesci != null ? liczbaCzesci.toString(): ""
+                ,liczbaDni != null ? liczbaDni.toString(): ""
+                ,liczbaDniOferty != null ? liczbaDniOferty.toString(): ""
+                ,liczbaMiesiecy != null ? liczbaMiesiecy.toString(): ""
+                ,liczbaWykonawcow != null ? liczbaWykonawcow.toString(): ""
+                ,nazwa != null ? nazwa.toString(): ""
+                ,numerBiuletynu != null ? numerBiuletynu.toString(): ""
+                ,numerZamowienia != null ? numerZamowienia.toString(): ""
+                ,ofertyCzesciowe != null ? ofertyCzesciowe.toString(): ""
+                ,ofertyGodz != null ? ofertyGodz.toString(): ""
+                ,ogloszenieBzp != null ? ogloszenieBzp.toString(): ""
+                ,powiatId != null ? powiatId.toString(): ""
+                ,pozycja != null ? pozycja.toString(): ""
+                ,projektUe != null ? projektUe.toString(): ""
+                ,przedmiot != null ? przedmiot.toString(): ""
+                ,publikacjaObowiazkowa != null ? publikacjaObowiazkowa.toString(): ""
+                ,orderKind != null ? orderKind.toString(): ""
+                ,sprawozdanieCalosc != null ? sprawozdanieCalosc.toString(): ""
+                ,sprawozdanieLataObrotowe != null ? sprawozdanieLataObrotowe.toString(): ""
+                ,statusId != null ? statusId.toString(): ""
+                ,termin != null ? termin.toString(): ""
+                ,trybId != null ? trybId.toString(): ""
+                ,trybyId != null ? trybyId.toString(): ""
+                ,trybyNazwa != null ? trybyNazwa.toString(): ""
+                ,documentType != null ? documentType.toString(): ""
+                ,uniewaznienie != null ? uniewaznienie.toString(): ""
+                ,uzupelniajace != null ? uzupelniajace.toString(): ""
+                ,wariant != null ? wariant.toString(): ""
+                ,wartoscCena != null ? wartoscCena.toString(): ""
+                ,wartoscCenaMax != null ? wartoscCenaMax.toString(): ""
+                ,wartoscCenaMin != null ? wartoscCenaMin.toString(): ""
+                ,wartoscSzacowana != null ? wartoscSzacowana.toString(): ""
+                ,wartoscSzacunkowa != null ? wartoscSzacunkowa.toString(): ""
+                ,wojewodztwoId != null ? wojewodztwoId.toString(): ""
+                ,wykonawcaStr != null ? wykonawcaStr.toString(): ""
+                ,zaliczka != null ? zaliczka.toString(): ""
+                ,zamowienieUe != null ? zamowienieUe.toString(): ""
+                ,zmianaOgloszenia != null ? zmianaOgloszenia.toString(): ""
+                ,zmianaUmowy != null ? zmianaUmowy.toString(): ""};
+    }
 
 }
