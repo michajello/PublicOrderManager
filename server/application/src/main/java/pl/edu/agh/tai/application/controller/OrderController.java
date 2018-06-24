@@ -1,25 +1,34 @@
 package pl.edu.agh.tai.application.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.edu.agh.tai.application.service.OrderService;
 import pl.edu.agh.tai.application.util.ApiConstants;
+import pl.edu.agh.tai.dbmodel.repository.OrderRepository;
 
 import java.io.IOException;
-import java.net.URL;
 
 @RestController
 public class OrderController {
 
-    @GetMapping(ApiConstants.ORDERS)
-    public ResponseEntity<?> getOrders() throws IOException {
-        URL url = new URL(ApiConstants.DATA_SERVER_ADDRESS);
-//        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//        con.setRequestMethod("GET");
+    private final OrderRepository orderRepository;
+    private final OrderService orderService;
 
-        return new ResponseEntity<>("Nothing", HttpStatus.OK);
+    @Autowired
+    public OrderController(OrderRepository orderRepository, OrderService orderService) {
+        this.orderRepository = orderRepository;
+        this.orderService = orderService;
+    }
 
+
+    @GetMapping(ApiConstants.ORDERS_PAGE_SIZE)
+    public ResponseEntity<?> getOrders(@RequestParam(value = ApiConstants.PAGE_VAR) Integer page, @RequestParam(value = ApiConstants.SIZE_VAR) Integer size){
+
+        return new ResponseEntity<>(orderService.getOrders(page, size), HttpStatus.OK);
     }
 
 }

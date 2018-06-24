@@ -1,5 +1,7 @@
 package pl.edu.agh.tai.dbmodel.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -27,6 +29,8 @@ public class Order implements Hashable {
     @Column(name = "order_id_from_rest_server")
     private Long restId;
 
+
+    @JsonManagedReference
     @ManyToOne/*(cascade = {CascadeType.PERSIST})*/
     @JoinColumn(name = "orderer_id")
     private Orderer orderer;
@@ -174,6 +178,7 @@ public class Order implements Hashable {
 
 
     @Override
+    @JsonIgnore
     public String[] getItemsUsedInHash() {
         return new String[]{
                 akcept != null ? akcept.toString(): ""
