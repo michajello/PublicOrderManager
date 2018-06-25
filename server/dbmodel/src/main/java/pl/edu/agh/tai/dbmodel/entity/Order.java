@@ -32,7 +32,7 @@ public class Order implements Hashable {
 
 
     @JsonManagedReference
-    @ManyToOne(optional = false)/*(cascade = {CascadeType.PERSIST})*/
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)/*(cascade = {CascadeType.PERSIST})*/
     @JoinColumn(name = "orderer_id")
     private Orderer orderer;
 

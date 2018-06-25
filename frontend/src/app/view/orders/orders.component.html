@@ -1,14 +1,52 @@
 <div class="container">
-  <table class="table table-striped" style="border-collapse:collapse;">
+    <div class="row">
+            <form>
+                    Strona:
+                    <input type="number" name ="pageOffset" required [(ngModel)]=pageOffset><br>
+                    Liczba elementów na stronie:
+                    <input type="number"  name ="pageSize" required [(ngModel)]=pageSize><br>
+                    <input type="submit" (click)="onClickForm()" value="Zatwierdź">
+            </form> 
+    </div>
+
+    <p *ngIf = "pageOffset>1" ><span class="glyphicon glyphicon-arrow-left" ></span></p>    
+    <p (click)="onClickNext()"><span class="glyphicon glyphicon-arrow-right"></span></p>    
+    <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <p class="page-link" href="" aria-label="Previous" (click)="onClickPrevious()" *ngIf = "pageOffset>1">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </p>
+              </li>
+              <li class="page-item">
+                <p   class="page-link" href="" aria-label="Next" (click)="onClickNext()">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </p>
+              </li>
+            </ul>
+          </nav>
+
+    <table class="table table-striped">
       <thead>
       <tr>
       </tr>
       </thead>
 
       <tbody>
-      <tr *ngFor="let order of simplifiedOrders"> 
+      <ng-container  *ngFor="let order of simplifiedOrders"> 
       <app-order-item [simplifiedOrder]="order"></app-order-item>
-      </tr>
+      </ng-container >
   </tbody>
 
   </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+  </nav>
+  </div>
