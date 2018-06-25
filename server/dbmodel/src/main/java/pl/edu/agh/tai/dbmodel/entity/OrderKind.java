@@ -5,7 +5,8 @@ import lombok.Getter;
 @Getter
 public enum OrderKind {
     CONSTRUCTION_WORKS(1, "Roboty budowlane"),
-    SERVICES(2, "Usługi");
+    SERVICES(2, "Usługi"),
+    DELIVERIES(3, "Dostawy");
 
 
     private final int id;

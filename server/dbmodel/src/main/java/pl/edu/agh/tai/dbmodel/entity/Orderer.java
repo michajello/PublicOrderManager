@@ -1,5 +1,6 @@
 package pl.edu.agh.tai.dbmodel.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class Orderer {
     private Long id;
 
     @OneToMany(mappedBy = "orderer")
+    @JsonBackReference
     private List<Order> orders;
 
     @Column(name = "zamawiajacy_email")

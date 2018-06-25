@@ -1,12 +1,15 @@
 package pl.edu.agh.tai.dbmodel.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import pl.edu.agh.tai.dbmodel.util.Hashable;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Builder(builderMethodName = "innerBuilder")
@@ -27,7 +30,9 @@ public class Order implements Hashable {
     @Column(name = "order_id_from_rest_server")
     private Long restId;
 
-    @ManyToOne/*(cascade = {CascadeType.PERSIST})*/
+
+    @JsonManagedReference
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)/*(cascade = {CascadeType.PERSIST})*/
     @JoinColumn(name = "orderer_id")
     private Orderer orderer;
 
@@ -174,6 +179,18 @@ public class Order implements Hashable {
 
 
     @Override
+    public String getHash() {
+        return hash;
+    }
+
+    @Override
+    public void setHash(String newHash) {
+        this.hash = newHash;
+    }
+
+
+    @Override
+    @JsonIgnore
     public String[] getItemsUsedInHash() {
         return new String[]{
                 akcept != null ? akcept.toString(): ""
@@ -240,5 +257,4 @@ public class Order implements Hashable {
     public void setHash(String newHash){
 
     }
-
 }
