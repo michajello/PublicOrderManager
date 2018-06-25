@@ -17,6 +17,6 @@ export class ApiService {
 
   public getSampleOrders(page: number, size: number) {
     return this.http
-      .get<SimplifiedOrder>(API_URL.replace(PAGE_VAR, String(page)).replace(SIZE_VAR, String(size)));
+      .get<SimplifiedOrder[]>(API_URL.replace(PAGE_VAR, String(page)).replace(SIZE_VAR, String(size)));
   }
 }

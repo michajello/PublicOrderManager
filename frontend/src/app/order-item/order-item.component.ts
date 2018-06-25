@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../services/api.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { SimplifiedOrder } from '../model/SimplifiedOrder';
+
 
 @Component({
   selector: 'app-order-item',
   templateUrl: './order-item.component.html',
   styleUrls: ['./order-item.component.css'],
-  providers: [ApiService]
 })
 export class OrderItemComponent implements OnInit {
+  @Input() simplifiedOrder: SimplifiedOrder;
 
-  content = null;
-  constructor(private apiService: ApiService) {
-    this.apiService.getSampleOrders(1, 20).subscribe(data => {this.content = data; });
-    console.log( 'aa' + this.content);
+  constructor() {
   }
 
 

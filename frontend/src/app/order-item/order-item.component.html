@@ -1,5 +1,13 @@
-<div style="text-align:center">
-  <h1>
-    Welcome to {{content|json}}!
-  </h1>
-</div>
+<ng-container *ngIf="simplifiedOrder">
+  <td class="col-1">{{ simplifiedOrder.id }}</td>
+  <td class="col-2">{{ simplifiedOrder.data_publikacji_zamowienia }}</td>
+  <td class="col-4">{{ simplifiedOrder.nazwa.substr(0,30) + '...'}}</td>
+  <!-- <td class="col-3">{{ simplifiedOrder.termin }}</td> -->
+  <td class="col-1">{{ simplifiedOrder['zamowienia_publiczne_tryby.nazwa'] }}</td>
+  <td class="col-1">{{ simplifiedOrder['zamowienia_publiczne_typy.nazwa'] }}</td>
+  <td class="col-1">{{ simplifiedOrder.wartosc_cena_max }}</td>
+  <td class="col-1">{{ simplifiedOrder.wartosc_cena_min }}</td>
+  <td class="col-1">{{ simplifiedOrder.wartosc_szacowana }}</td>
+  <td class="col-1">{{ simplifiedOrder.rodzaje_nazwa }}</td>
+</ng-container>
+
