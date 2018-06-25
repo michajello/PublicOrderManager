@@ -59,7 +59,7 @@ public class ScheduledTasks {
         this.entityManager = entityManager;
     }
 
-    @Scheduled(fixedDelay = 50000)
+    //@Scheduled(fixedDelay = 50000)
     protected void downloadDataFromSejmometrServerAndUpdateDatabase() {
         logger.info("SEJMOMETR -  Init task -  downloading data .");
 
