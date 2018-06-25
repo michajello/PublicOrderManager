@@ -247,4 +247,14 @@ public class Order implements Hashable {
                 ,zmianaOgloszenia != null ? zmianaOgloszenia.toString(): ""
                 ,zmianaUmowy != null ? zmianaUmowy.toString(): ""};
     }
+
+    @Override
+    public String getHash(){
+        return "";
+    }
+
+    @Override
+    public void setHash(String newHash){
+
+    }
 }
