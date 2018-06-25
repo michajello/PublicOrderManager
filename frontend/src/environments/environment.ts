@@ -5,5 +5,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://api-v3.mojepanstwo.pl/dane/zamowienia_publiczne.json'
+  pageVar: '{$p}',
+  sizeVar: '{$s}',
+  // pageParam: 'page=' + this.pageVars ,
+  // sizeParam: 'size=' + this.sizeVar,
+  ORDER_URL: 'http://localhost:8080/orders?page={$p}&size={$s}'
+
 };

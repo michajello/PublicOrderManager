@@ -5,13 +5,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { OrderItemComponent } from './order-item/order-item.component';
 import { ApiService } from './services/api.service';
+import { OrdersComponent } from './view/orders/orders.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    OrderItemComponent
+    OrderItemComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule, HttpClientModule
