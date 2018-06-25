@@ -59,7 +59,8 @@ public class ScheduledTasks {
         this.entityManager = entityManager;
     }
 
-    @Scheduled(fixedDelay = 50000)
+    //every day at 11 AM
+    @Scheduled(cron = "0 0 11 * * *")
     protected void downloadDataFromSejmometrServerAndUpdateDatabase() {
         logger.info("SEJMOMETR -  Init task -  downloading data .");
 

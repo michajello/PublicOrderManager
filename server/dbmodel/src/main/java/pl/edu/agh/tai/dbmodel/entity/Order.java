@@ -3,12 +3,13 @@ package pl.edu.agh.tai.dbmodel.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
 import pl.edu.agh.tai.dbmodel.util.Hashable;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Index;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Builder(builderMethodName = "innerBuilder")
@@ -31,7 +32,7 @@ public class Order implements Hashable {
 
 
     @JsonManagedReference
-    @ManyToOne/*(cascade = {CascadeType.PERSIST})*/
+    @ManyToOne(optional = false)/*(cascade = {CascadeType.PERSIST})*/
     @JoinColumn(name = "orderer_id")
     private Orderer orderer;
 
@@ -178,6 +179,17 @@ public class Order implements Hashable {
 
 
     @Override
+    public String getHash() {
+        return hash;
+    }
+
+    @Override
+    public void setHash(String newHash) {
+        this.hash = newHash;
+    }
+
+
+    @Override
     @JsonIgnore
     public String[] getItemsUsedInHash() {
         return new String[]{
@@ -235,5 +247,4 @@ public class Order implements Hashable {
                 ,zmianaOgloszenia != null ? zmianaOgloszenia.toString(): ""
                 ,zmianaUmowy != null ? zmianaUmowy.toString(): ""};
     }
-
 }
