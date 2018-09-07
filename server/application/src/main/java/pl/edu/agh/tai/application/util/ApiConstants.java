@@ -6,6 +6,8 @@ public class ApiConstants {
 
     public static final String ORDERS = "/orders";
 
+    public static final String USERS = "/users";
+
     public static final String PAGE_VAR = "page";
 
     public static final String SIZE_VAR = "size";
