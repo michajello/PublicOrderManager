@@ -3,8 +3,8 @@ package pl.edu.agh.tai.application.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.edu.agh.tai.application.dto.client.UserCreationDTO;
-import pl.edu.agh.tai.application.dto.client.UserDTO;
+import pl.edu.agh.tai.application.dto.client.user.UserCreationDTO;
+import pl.edu.agh.tai.application.dto.client.user.UserDTO;
 import pl.edu.agh.tai.application.service.UserService;
 import pl.edu.agh.tai.application.util.ApiConstants;
 import pl.edu.agh.tai.dbmodel.entity.User;
@@ -40,10 +40,21 @@ public class UserController {
         return ResponseEntity.ok(userService.getUser(userId));
     }
 
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUser(@PathVariable long userId, @RequestBody UserDTO userDTO) {
+        return ResponseEntity.ok(userService.updateUser(userDTO));
+    }
+
     @DeleteMapping("/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable long userId) {
         userService.deleteUser(userId);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/{userId}/observing")
+    public ResponseEntity<?> getObserving(@PathVariable long userId) {
+        return ResponseEntity.ok(userService.getObserving(userId));
+    }
+
 
 }

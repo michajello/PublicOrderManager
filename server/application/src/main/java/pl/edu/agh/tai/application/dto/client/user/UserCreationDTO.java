@@ -1,4 +1,4 @@
-package pl.edu.agh.tai.application.dto.client;
+package pl.edu.agh.tai.application.dto.client.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

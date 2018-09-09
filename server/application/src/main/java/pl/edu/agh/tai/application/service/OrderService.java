@@ -4,7 +4,7 @@ import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import pl.edu.agh.tai.application.dto.client.SimplifiedOrderDto;
+import pl.edu.agh.tai.application.dto.client.order.SimplifiedOrderDto;
 import pl.edu.agh.tai.application.dto.mapper.mappingstruct.SimplifiedOrderMapper;
 import pl.edu.agh.tai.dbmodel.entity.Order;
 import pl.edu.agh.tai.dbmodel.repository.OrderRepository;
@@ -25,7 +25,7 @@ public class OrderService {
 
 
     public List<SimplifiedOrderDto> getOrders(Integer page, Integer size) {
-        List<Order> orders = orderRepository.findAll(new PageRequest(page, size)).getContent();
+        List<Order> orders = orderRepository.findAll(PageRequest.of(page, size)).getContent();
         return orders.stream()
                 .map(order -> simplifiedOrderMapper.orderToSimplifiedOrderDto(order))
                 .collect(Collectors.toList());

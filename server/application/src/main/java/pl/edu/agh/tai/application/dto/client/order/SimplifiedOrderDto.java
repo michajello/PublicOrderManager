@@ -1,4 +1,4 @@
-package pl.edu.agh.tai.application.dto.client;
+package pl.edu.agh.tai.application.dto.client.order;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
