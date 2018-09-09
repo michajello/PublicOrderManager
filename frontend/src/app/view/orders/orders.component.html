@@ -5,6 +5,11 @@
                     <input type="number" name ="pageOffset" required [(ngModel)]=pageOffset><br>
                     Liczba elementów na stronie:
                     <input type="number"  name ="pageSize" required [(ngModel)]=pageSize><br>
+                    Początkowa data publikacji:
+                    <input type="date"  data-date-format="YYYY-MM-DD" name ="startDate" required [(ngModel)]=startDateStr><br>
+                    Końcowa data publikacji:
+                    <input type="date"  data-date-format="YYYY-MM-DD" name ="endDate" required [(ngModel)]=endDateStr><br>
+                    
                     <input type="submit" (click)="onClickForm()" value="Zatwierdź">
             </form> 
     </div>

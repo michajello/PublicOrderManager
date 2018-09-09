@@ -10,6 +10,10 @@ public class ApiConstants {
 
     public static final String SIZE_VAR = "size";
 
+    public static final String START_DATE_VAR = "startDate";
+
+    public static final String FINISH_DATE_VAR = "finishDate";
+
 //    public static final String PAGE_SIZE_PARAMS =  String.format("?/{%s}/{%s}",  PAGE_VAR , SIZE_VAR ) ;
 
     public static final String ORDERS_PAGE_SIZE =  ORDERS;
