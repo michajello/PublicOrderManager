@@ -14,7 +14,10 @@ const SIZE_VAR = environment.sizeVar;
 const ID_VAR = environment.idVar;
 const START_DATE_VAR = environment.startDateVar;
 const FINISH_DATE_VAR = environment.finishDateVar;
-
+const VOIVODESHIP_VAR =  environment.voivodeshipVar;
+const ORDER_MODE_VAR =  environment.orderModeVar;
+const ORDER_TYPE_VAR =  environment.orderTypeVar;
+const ORDER_KIND_VAR =  environment.orderKindModeVar;
 
 @Injectable()
 export class ApiService {
@@ -25,23 +28,27 @@ export class ApiService {
     return givenDate.toISOString().substring(0, 10);
   }
 
-  private prepareOrderRequest(page: number, size: number, startDate: Date, endDate: Date): string {
+  private prepareOrderRequest(page: number, size: number, startDate: Date, endDate: Date,
+    voivodeship: number, orderKind: number, orderType: number, orderMode: number): string {
     let requestAddress = API_URL.replace(PAGE_VAR, String(page)).replace(SIZE_VAR, String(size));
     console.log(startDate);
     console.log(endDate);
 
-
     requestAddress = requestAddress
     .replace(START_DATE_VAR, START_DATE_VAR + (startDate != null ? this.extractOnlyDate(startDate) : ''))
-    .replace(FINISH_DATE_VAR, FINISH_DATE_VAR + (endDate != null ? this.extractOnlyDate(endDate) : ''));
-
+    .replace(FINISH_DATE_VAR, FINISH_DATE_VAR + (endDate != null ? this.extractOnlyDate(endDate) : ''))
+    .replace(VOIVODESHIP_VAR, VOIVODESHIP_VAR + (voivodeship != null ? voivodeship : ''))
+    .replace(ORDER_MODE_VAR, ORDER_MODE_VAR + (orderMode != null ? orderMode : ''))
+    .replace(ORDER_TYPE_VAR, ORDER_TYPE_VAR + (orderType != null ? orderType : ''))
+    .replace(ORDER_KIND_VAR, ORDER_KIND_VAR + (orderKind != null ? orderKind : ''));
     console.log(requestAddress);
     return requestAddress;
   }
 
-  public getSampleOrders(page: number, size: number, startDate: Date, endDate: Date) {
+  public getSampleOrders(page: number, size: number, startDate: Date, endDate: Date,
+    voivodeship: number, orderKind: number, orderType: number, orderMode: number) {
     return this.http
-      .get<SimplifiedOrder[]>(this.prepareOrderRequest(page, size, startDate, endDate));
+      .get<SimplifiedOrder[]>(this.prepareOrderRequest(page, size, startDate, endDate, voivodeship, orderKind, orderType, orderMode));
   }
 
   public getSejmometrOrderDetails(id: number) {

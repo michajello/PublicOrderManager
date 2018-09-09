@@ -18,6 +18,10 @@ export class OrdersComponent implements OnInit {
   endDateStr: string;
   startDate: Date;
   finishDate: Date;
+  voivodeship: number;
+  orderKind: number;
+  orderMode: number;
+  orderType: number;
 
   constructor(private apiService: ApiService) {
     this.pageOffset = 1;
@@ -30,9 +34,8 @@ export class OrdersComponent implements OnInit {
 
   onClickForm(): void {
     this.pageSize = this.pageSize > 100 ? 100 : this.pageSize;
-    this.startDate =  this.startDateStr != null ? new Date(this.startDateStr) : null;
-    this.finishDate = this.endDateStr != null ?  new Date(this.endDateStr) : null;
-
+    this.startDate = this.startDateStr != null ? new Date(this.startDateStr) : null;
+    this.finishDate = this.endDateStr != null ? new Date(this.endDateStr) : null;
     this.getData();
   }
 
@@ -47,9 +50,10 @@ export class OrdersComponent implements OnInit {
   }
 
   private getData(): void {
-    this.apiService.getSampleOrders(this.pageOffset, this.pageSize, this.startDate, this.finishDate).subscribe(orders => {
-      this.simplifiedOrders = orders;
-    });
+    this.apiService.getSampleOrders(this.pageOffset, this.pageSize, this.startDate,
+      this.finishDate, this.voivodeship, this.orderKind, this.orderType, this.orderMode).subscribe(orders => {
+        this.simplifiedOrders = orders;
+      });
   }
 
 }

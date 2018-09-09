@@ -14,7 +14,7 @@ public static final String DATA_SERVER_ADDRESS = "https://api-v3.mojepanstwo.pl/
 
     public static final String FINISH_DATE_VAR = "finishDate";
 
-    public static final String VOIVODESHIP_VAR = "voivodeship";
+    public static final String VOIVODESHIP_VAR = "voivodeshipID";
 
     public static final String ORDER_MODE_VAR = "orderMode";
 
