@@ -10,6 +10,13 @@ export const environment = {
   idVar: '{$id}',
   // pageParam: 'page=' + this.pageVars ,
   // sizeParam: 'size=' + this.sizeVar,
-  ORDER_URL: 'http://localhost:8080/orders?page={$p}&size={$s}',
+  startDateVar: 'startDate=',
+  finishDateVar: 'finishDate=',
+  voivodeshipVar: 'voivodeshipID=',
+  orderModeVar: 'orderMode=',
+  orderTypeVar: 'orderType=',
+  orderKindModeVar: 'orderKind=',
+
+  ORDER_URL: 'http://localhost:8080/orders?page={$p}&size={$s}&startDate=&voivodeshipID=&finishDate=&orderMode=&orderType=&orderKind=',
   SEJMOMETR_URL: 'https://api-v3.mojepanstwo.pl/dane/zamowienia_publiczne/{$id}'
 };
