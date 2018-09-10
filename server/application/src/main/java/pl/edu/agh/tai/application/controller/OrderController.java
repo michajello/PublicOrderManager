@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.edu.agh.tai.application.dto.client.SimplifiedOrderDto;
+import pl.edu.agh.tai.application.dto.client.order.SimplifiedOrderDto;
 import pl.edu.agh.tai.application.service.OrderService;
 import pl.edu.agh.tai.application.util.ApiConstants;
 

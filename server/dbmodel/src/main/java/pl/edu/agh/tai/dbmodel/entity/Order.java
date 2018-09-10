@@ -30,7 +30,6 @@ public class Order implements Hashable {
     @Column(name = "order_id_from_rest_server")
     private Long restId;
 
-
     @JsonManagedReference
     @ManyToOne(optional = false, fetch = FetchType.LAZY)/*(cascade = {CascadeType.PERSIST})*/
     @JoinColumn(name = "orderer_id")
