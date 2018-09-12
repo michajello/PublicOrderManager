@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 // import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
 import { SimplifiedOrder } from '../model/SimplifiedOrder';
 import { OrderSejmometr } from '../model/OrderSejmometr';
 
@@ -29,30 +28,30 @@ export class ApiService {
   }
 
   private prepareOrderRequest(page: number, size: number, startDate: Date, endDate: Date,
-    voivodeship: number, orderKind: number, orderType: number, orderMode: number): string {
+                              voivodeship: number, orderKind: number, orderType: number, orderMode: number): string {
     let requestAddress = API_URL.replace(PAGE_VAR, String(page)).replace(SIZE_VAR, String(size));
     console.log(startDate);
     console.log(endDate);
 
     requestAddress = requestAddress
-    .replace(START_DATE_VAR, START_DATE_VAR + (startDate != null ? this.extractOnlyDate(startDate) : ''))
-    .replace(FINISH_DATE_VAR, FINISH_DATE_VAR + (endDate != null ? this.extractOnlyDate(endDate) : ''))
-    .replace(VOIVODESHIP_VAR, VOIVODESHIP_VAR + (voivodeship != null ? voivodeship : ''))
-    .replace(ORDER_MODE_VAR, ORDER_MODE_VAR + (orderMode != null ? orderMode : ''))
-    .replace(ORDER_TYPE_VAR, ORDER_TYPE_VAR + (orderType != null ? orderType : ''))
-    .replace(ORDER_KIND_VAR, ORDER_KIND_VAR + (orderKind != null ? orderKind : ''));
+      .replace(START_DATE_VAR, START_DATE_VAR + (startDate != null ? this.extractOnlyDate(startDate) : ''))
+      .replace(FINISH_DATE_VAR, FINISH_DATE_VAR + (endDate != null ? this.extractOnlyDate(endDate) : ''))
+      .replace(VOIVODESHIP_VAR, VOIVODESHIP_VAR + (voivodeship != null ? voivodeship : ''))
+      .replace(ORDER_MODE_VAR, ORDER_MODE_VAR + (orderMode != null ? orderMode : ''))
+      .replace(ORDER_TYPE_VAR, ORDER_TYPE_VAR + (orderType != null ? orderType : ''))
+      .replace(ORDER_KIND_VAR, ORDER_KIND_VAR + (orderKind != null ? orderKind : ''));
     console.log(requestAddress);
     return requestAddress;
   }
 
   public getSampleOrders(page: number, size: number, startDate: Date, endDate: Date,
-    voivodeship: number, orderKind: number, orderType: number, orderMode: number) {
+                         voivodeship: number, orderKind: number, orderType: number, orderMode: number) {
     return this.http
       .get<SimplifiedOrder[]>(this.prepareOrderRequest(page, size, startDate, endDate, voivodeship, orderKind, orderType, orderMode));
   }
 
   public getSejmometrOrderDetails(id: number) {
     return this.http
-    .get<OrderSejmometr>(SEJMOMETR_API_URL.replace(ID_VAR, String(id)));
+      .get<OrderSejmometr>(SEJMOMETR_API_URL.replace(ID_VAR, String(id)));
   }
 }

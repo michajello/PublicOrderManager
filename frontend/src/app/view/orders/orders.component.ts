@@ -52,8 +52,8 @@ export class OrdersComponent implements OnInit {
   private getData(): void {
     this.apiService.getSampleOrders(this.pageOffset, this.pageSize, this.startDate,
       this.finishDate, this.voivodeship, this.orderKind, this.orderType, this.orderMode).subscribe(orders => {
-        this.simplifiedOrders = orders;
-      });
+      this.simplifiedOrders = orders;
+    });
   }
 
 }

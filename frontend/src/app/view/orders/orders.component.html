@@ -1,17 +1,29 @@
 <div class="container">
   <div class="row">
     <form>
-      Strona:
-      <input type="number" name="pageOffset" required [(ngModel)]=pageOffset><br>
-      Liczba elementów na stronie:
-      <input type="number" name="pageSize" required [(ngModel)]=pageSize><br>
-      Początkowa data publikacji:
-      <input type="date" data-date-format="YYYY-MM-DD" name="startDate" required [(ngModel)]=startDateStr><br>
-      Końcowa data publikacji:
-      <input type="date" data-date-format="YYYY-MM-DD" name="endDate" required [(ngModel)]=endDateStr><br>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="page_form">Strona:</label>
+          <input class="form-control" min="1" type="number" id="page_form" name="pageOffset" required [(ngModel)]=pageOffset>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="size_input">Liczba elementów na stronie:</label>
+          <input class="form-control" min="1" id="size_input" type="number" name="pageSize" required [(ngModel)]=pageSize>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Początkowa data publikacji:</label>
+          <input class="form-control" type="date" data-date-format="YYYY-MM-DD" name="startDate" required [(ngModel)]=startDateStr>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Końcowa data publikacji:</label>
+          <input class="form-control" type="date" data-date-format="YYYY-MM-DD" name="endDate" required [(ngModel)]=endDateStr>
+        </div>
+      </div>
 
-      Województwo:
-      <select name=voivodeship required [(ngModel)]=voivodeship>
+      <label>Województwo:</label>
+      <select class="form-control" name=voivodeship required [(ngModel)]=voivodeship>
         <option label=" "></option>
         <option value=1>dolnośląskie</option>
         <option value=2>kujawsko-pomorskie</option>
@@ -31,28 +43,34 @@
         <option value=16>zachodniopomorskie</option>
       </select>
 
-      <br>
-      Rodzaj zamówienia:
-      <select name="orderKind" required [(ngModel)]=orderKind>
-        <option label=" "></option>
-        <option value=1>Roboty budowlane</option>
-        <option value=2>Usługi</option>
-        <option value=3>Dostawy</option>
-      </select>
-      <br>
-      Typ dokumentu:
-      <select name="orderType" required [(ngModel)]=orderType>
-        <option label=" "></option>
-        <option value=1>Ogłoszenie o zamówieniu</option>
-        <option value=2>Uproszczone ogłoszenie</option>
-        <option value=3>Ogłoszenie o udzieleniu zamówienia</option>
-        <option value=4>Ogłoszenie konkursu</option>
-        <option value=5>Ogłoszenie wyników konkursu</option>
-        <option value=6>Zmiana ogłoszenia</option>
-        <option value=7>Zamiar zawarcia umowy</option>
-      </select>
 
-      <input type="submit" (click)="onClickForm()" value="Zatwierdź">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+
+          <label>Rodzaj zamówienia:</label>
+          <select class="form-control" name="orderKind" required [(ngModel)]=orderKind>
+            <option label=" "></option>
+            <option value=1>Roboty budowlane</option>
+            <option value=2>Usługi</option>
+            <option value=3>Dostawy</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Typ dokumentu:</label>
+          <select class="form-control" name="orderType" required [(ngModel)]=orderType>
+            <option label=" "></option>
+            <option value=1>Ogłoszenie o zamówieniu</option>
+            <option value=2>Uproszczone ogłoszenie</option>
+            <option value=3>Ogłoszenie o udzieleniu zamówienia</option>
+            <option value=4>Ogłoszenie konkursu</option>
+            <option value=5>Ogłoszenie wyników konkursu</option>
+            <option value=6>Zmiana ogłoszenia</option>
+            <option value=7>Zamiar zawarcia umowy</option>
+          </select>
+        </div>
+      </div>
+
+      <input class="btn btn-primary" type="submit" (click)="onClickForm()" value="Zatwierdź">
     </form>
   </div>
 
@@ -77,14 +95,14 @@
 
   <table class="table table-striped">
     <thead>
-      <tr>
-      </tr>
+    <tr>
+    </tr>
     </thead>
 
     <tbody>
-      <ng-container *ngFor="let order of simplifiedOrders">
-        <app-order-item [simplifiedOrder]="order"></app-order-item>
-      </ng-container>
+    <ng-container *ngFor="let order of simplifiedOrders">
+      <app-order-item [simplifiedOrder]="order"></app-order-item>
+    </ng-container>
     </tbody>
 
   </table>
