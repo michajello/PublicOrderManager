@@ -12,7 +12,7 @@ import java.util.List;
 public class UserDTO {
 
     private long id;
-    private String login;
+    private String username;
     private String email;
     private List<Order> observing = new ArrayList<>();
 

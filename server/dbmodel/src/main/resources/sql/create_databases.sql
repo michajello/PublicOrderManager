@@ -37,7 +37,8 @@ ALTER TABLE public.orderer
 CREATE TABLE public.user_table
 (
     id bigint NOT NULL,
-    login character varying COLLATE pg_catalog."default" NOT NULL,
+    username character varying COLLATE pg_catalog."default" NOT NULL,
+    password character varying(255) COLLATE pg_catalog."default" NOT NULL,
     email character varying COLLATE pg_catalog."default" NOT NULL,
     CONSTRAINT user_pkey PRIMARY KEY (id)
 )

@@ -17,7 +17,8 @@ public class User {
 
     @Id
     private long id;
-    private String login;
+    private String username;
+    private String password;
     private String email;
     @ManyToMany
     @JoinTable(
@@ -26,5 +27,10 @@ public class User {
         inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id")
     )
     private List<Order> observing = new ArrayList<>();
+
+    public void update(User updated) {
+        this.username = updated.username;
+        this.email = updated.email;
+    }
 
 }

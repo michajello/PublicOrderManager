@@ -2,6 +2,7 @@ package pl.edu.agh.tai.application.service;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.edu.agh.tai.application.dto.client.order.SimplifiedOrderDto;
 import pl.edu.agh.tai.application.dto.client.user.UserCreationDTO;
@@ -21,10 +22,12 @@ public class UserService {
     private UserRepository userRepository;
     private UserMapper userMapper = UserMapper.INSTANCE;
     private SimplifiedOrderMapper orderMapper = Mappers.getMapper(SimplifiedOrderMapper.class);
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
     public List<UserDTO> getUsers() {
@@ -39,6 +42,7 @@ public class UserService {
     }
 
     public User createUser(UserCreationDTO userDTO) {
+        userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
         return userRepository.save(userMapper.userCreationDTOToUser(userDTO));
     }
 
@@ -47,8 +51,9 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public UserDTO updateUser(UserDTO userDTO){
-        User user = findUser(userDTO.getId());
+    public UserDTO updateUser(long userId, UserDTO userDTO){
+        User user = findUser(userId);
+        user.update(userMapper.userDTOToUser(userDTO));
         return userMapper.userToUserDTO(userRepository.save(user));
     }
 
