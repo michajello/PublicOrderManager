@@ -1,4 +1,4 @@
-<tr  *ngIf="simplifiedOrder" (click)="onSelect()">
+<tr  style="background-color: #F5F5F5"   *ngIf="simplifiedOrder" (click)="onSelect()">
   <td class="col-2">{{ simplifiedOrder.data_publikacji_zamowienia }}</td>
   <td class="col-4">{{ simplifiedOrder.nazwa.substr(0,30) + '...'}}</td>
   <!-- <td class="col-3">{{ simplifiedOrder.termin }}</td> -->
