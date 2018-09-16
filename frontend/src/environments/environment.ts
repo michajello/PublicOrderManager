@@ -16,7 +16,9 @@ export const environment = {
   orderModeVar: 'orderMode=',
   orderTypeVar: 'orderType=',
   orderKindModeVar: 'orderKind=',
+  minEstimatedPriceVar: 'minEstPrice=',
+  maxEstimatedPriceVar: 'maxEstPrice=',
 
-  ORDER_URL: 'http://localhost:8080/orders?page={$p}&size={$s}&startDate=&voivodeshipID=&finishDate=&orderMode=&orderType=&orderKind=',
+  ORDER_URL: 'http://localhost:8080/orders?page={$p}&size={$s}&startDate=&voivodeshipID=&finishDate=&orderMode=&orderType=&orderKind=&minEstPrice=&maxEstPrice=',
   SEJMOMETR_URL: 'https://api-v3.mojepanstwo.pl/dane/zamowienia_publiczne/{$id}'
 };

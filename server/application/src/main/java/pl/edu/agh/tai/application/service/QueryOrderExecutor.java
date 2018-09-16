@@ -1,7 +1,6 @@
 package pl.edu.agh.tai.application.service;
 
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.parameters.P;
 import pl.edu.agh.tai.dbmodel.entity.DocumentType;
 import pl.edu.agh.tai.dbmodel.entity.OrderKind;
 import pl.edu.agh.tai.dbmodel.repository.OrderRepository;
@@ -27,6 +26,9 @@ public class QueryOrderExecutor {
 
     private static final LocalDate MIN_DATE = LocalDate.of(1000, 11, 11);
     private static final LocalDate MAX_DATE = LocalDate.of(3000, 11, 11);
+    private static final int MIN_ESTIMATED_PRICE = 0;
+    private static final Long MAX_ESTIMATED_PRICE = Long.MAX_VALUE;
+
 
     private final OrderRepository orderRepository;
     private final int page;
@@ -37,11 +39,13 @@ public class QueryOrderExecutor {
     private final List<String> orderModeIds;
     private final List<DocumentType> orderTypeIds;
     private final List<OrderKind> orderKindIds;
+    private final Long minEstimatedPrice;
+    private final Long maxEstimatedPrice;
 
 
     public QueryOrderExecutor(OrderRepository orderRepository, int page, int size,
                               LocalDate startDate, LocalDate finishDate, Integer voivodshipId,
-                              Integer orderModeId, Integer orderTypeId, Integer orderKindId) {
+                              Integer orderModeId, Integer orderTypeId, Integer orderKindId, Long minEstimatedPrice, Long maxEstimatedPrice) {
         this.orderRepository = orderRepository;
         this.page = page;
         this.size = size;
@@ -51,8 +55,9 @@ public class QueryOrderExecutor {
         this.orderModeIds = initOrderModeIds(orderModeId);
         this.orderTypeIds = initOrderTypes(orderTypeId);
         this.orderKindIds = initOrderKinds(orderKindId);
+        this.minEstimatedPrice = initMinEstimatedPrice(minEstimatedPrice);
+        this.maxEstimatedPrice = initMaxEstimatedPrice(maxEstimatedPrice);
     }
-
 
     private List<String> initVoivodeshipsID(Integer voivodeshipId) {
         return voivodeshipId == null ? QueryOrderExecutor.voivodeshipIDs: Arrays.asList(voivodeshipId.toString());
@@ -78,24 +83,24 @@ public class QueryOrderExecutor {
         return orderKind == null ? Arrays.asList(OrderKind.values()) : Arrays.asList(orderKind);
     }
 
+
+    private Long initMaxEstimatedPrice(Long maxEstimatedPrice) {
+        return maxEstimatedPrice == null? QueryOrderExecutor.MAX_ESTIMATED_PRICE: maxEstimatedPrice;
+    }
+
+    private Long initMinEstimatedPrice(Long minEstimatedPrice) {
+        return minEstimatedPrice == null? QueryOrderExecutor.MIN_ESTIMATED_PRICE: minEstimatedPrice;
+    }
+
     public List<Order> performQuery() {
         return orderRepository.searchByParameters(startDate, finishDate,
                 voivodshipIds,
                 orderModeIds,
                 orderTypeIds,
                 orderKindIds,
+                minEstimatedPrice,
+                maxEstimatedPrice,
                 PageRequest.of(page, size)
         );
-//                .getContent();
-
-//        if (startDate == null && finishDate == null){
-//            return orderRepository.findAll(PageRequest.of(page, size)).getContent();
-//        }
-//        else if(startDate == null){
-//            return orderRepository.findByDataPublikacjiBefore(finishDate, PageRequest.of(page, size)).getContent();
-//        }else if(finishDate == null) {
-//            return orderRepository.findByDataPublikacjiAfter(startDate, PageRequest.of(page, size)).getContent();
-//        }
-//        return orderRepository.findByDataPublikacjiAfterAndDataPublikacjiBefore(startDate,finishDate, PageRequest.of(page, size)).getContent();
     }
 }

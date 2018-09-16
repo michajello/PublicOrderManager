@@ -21,6 +21,17 @@
           <input class="form-control" type="date" data-date-format="YYYY-MM-DD" name="endDate" required [(ngModel)]=endDateStr>
         </div>
       </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>Minimalna wartość szacunkowa:</label>
+          <input class="form-control" min="1" type="number" name="minEstimatedPrice" required [(ngModel)]=minEstimatedPrice>
+        </div>
+        <div class="form-group col-md-6">
+          <label>Maksymalna wartość szacunkowa:</label>
+          <input class="form-control" min="1" type="number" name="maxEstimatedPrice" required [(ngModel)]=maxEstimatedPrice>
+        </div>
+      </div>
+
 
       <label>Województwo:</label>
       <select class="form-control" name=voivodeship required [(ngModel)]=voivodeship>
@@ -94,11 +105,6 @@
   </nav>
 
   <table class="table table-striped">
-    <thead>
-      <tr>
-      </tr>
-    </thead>
-
     <tbody>
       <ng-container *ngFor="let order of simplifiedOrders">
         <app-order-item [simplifiedOrder]="order"></app-order-item>

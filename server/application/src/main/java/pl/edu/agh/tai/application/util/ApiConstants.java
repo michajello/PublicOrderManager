@@ -22,8 +22,9 @@ public static final String DATA_SERVER_ADDRESS = "https://api-v3.mojepanstwo.pl/
 
     public static final String ORDER_KIND_VAR = "orderKind";
 
+    public static final String MIN_ESTIMATED_PRICE_VAR = "minEstPrice";
 
-//    public static final String PAGE_SIZE_PARAMS =  String.format("?/{%s}/{%s}",  PAGE_VAR , SIZE_VAR ) ;
+    public static final String MAX_ESTIMATED_PRICE_VAR = "maxEstPrice";
 
     public static final int DEFAULT_ORDERS_PAGE_SIZE =  20;
 

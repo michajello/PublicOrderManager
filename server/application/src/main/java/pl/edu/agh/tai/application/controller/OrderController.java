@@ -34,12 +34,14 @@ public class OrderController {
                                        @RequestParam(value = ApiConstants.VOIVODESHIP_VAR, required = false) Integer voivodshipId,
                                        @RequestParam(value = ApiConstants.ORDER_MODE_VAR, required = false) Integer orderModeId,
                                        @RequestParam(value = ApiConstants.ORDER_TYPE_VAR, required = false) Integer orderTypeId,
-                                       @RequestParam(value = ApiConstants.ORDER_KIND_VAR, required = false) Integer orderKindId
+                                       @RequestParam(value = ApiConstants.ORDER_KIND_VAR, required = false) Integer orderKindId,
+                                       @RequestParam(value = ApiConstants.MIN_ESTIMATED_PRICE_VAR, required = false) Long minEstimatedPrice,
+                                       @RequestParam(value = ApiConstants.MAX_ESTIMATED_PRICE_VAR, required = false) Long maxEstimatedPrice
                                        ){
 
         List<SimplifiedOrderDto> orders = orderService.getOrders(page > 0 ? page: ApiConstants.DEFAULT_ORDERS_PAGE_SIZE, size > 0 ? size : 20, startDate, finishDate,
-                voivodshipId, orderModeId, orderTypeId, orderKindId);
-        return orders != null ? ResponseEntity.ok(orders):ResponseEntity.noContent().build();
+                voivodshipId, orderModeId, orderTypeId, orderKindId, minEstimatedPrice, maxEstimatedPrice);
+            return orders != null ? ResponseEntity.ok(orders):ResponseEntity.noContent().build();
     }
 
 }

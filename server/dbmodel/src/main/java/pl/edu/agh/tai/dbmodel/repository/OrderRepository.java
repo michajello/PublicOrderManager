@@ -23,8 +23,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      Page <Order> findByDataPublikacjiAfterAndDataPublikacjiBefore(LocalDate startDate, LocalDate finishDate, Pageable pageable);
 
      @Query("select o from Order o where o.dataPublikacji > ?1 and o.dataPublikacji < ?2 and o.wojewodztwoId in ?3  " +
-             "and o.trybId in ?4 and o.documentType in  ?5 and o.orderKind in ?6")
+             "and o.trybId in ?4 and o.documentType in  ?5 and o.orderKind in ?6 and o.wartoscSzacowana >= ?7 and o.wartoscSzacowana <= ?8")
      List<Order> searchByParameters(LocalDate startDate, LocalDate finishDate, List<String> voivodshipId, List<String> orderModeId,
-                                    List<DocumentType> orderType, List<OrderKind> orderKind, Pageable pageable);
+                                    List<DocumentType> orderType, List<OrderKind> orderKind, Long minEstPrice, Long maxEstPrice, Pageable pageable);
 
 }
