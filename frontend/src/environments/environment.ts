@@ -16,7 +16,7 @@ export const environment = {
   orderTypeVar: 'orderType=',
   orderKindModeVar: 'orderKind=',
 
-  SERVER_URL: 'https://localhost:8080',
+  SERVER_URL: 'http://localhost:8080',
   ORDER_URL: 'http://localhost:8080/orders?page={$p}&size={$s}&startDate=&voivodeshipID=&finishDate=&orderMode=&orderType=&orderKind=',
   SEJMOMETR_URL: 'https://api-v3.mojepanstwo.pl/dane/zamowienia_publiczne/{$id}'
 };

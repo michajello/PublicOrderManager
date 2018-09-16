@@ -1,13 +1,8 @@
 <div class="button-row">
-  <button mat-flat-buttonpgadmin="homeClick()">Strona główna</button>
-  <button mat-flat-button>Przeglądaj zamówienia</button>
-  <div *ngIf="loggedIn; then loggedInBlock else notLoggedInBlock"></div>
-  <div #notLoggedInBlock>
-    <button mat-flat-button>Rejestracja</button>
-    <button mat-flat-button>Logowanie</button>
-  </div>
-  <div #loggedInBlock>
-    <button mat-flat-button>Moje Zamówienia</button>
-    <button mat-flat-button>Wyloguj</button>
-  </div>
+  <button mat-flat-button (click)="home()" >Strona główna</button>
+  <button mat-flat-button (click)="orders()">Przeglądaj zamówienia</button>
+  <button mat-flat-button (click)="register()" *ngIf="!authService.loggedIn">Rejestracja</button>
+  <button mat-flat-button (click)="login()" *ngIf="!authService.loggedIn">Logowanie</button>
+  <button mat-flat-button (click)="myOrders()" *ngIf="authService.loggedIn">Moje Zamówienia</button>
+  <button mat-flat-button (click)="logout()" *ngIf="authService.loggedIn">Wyloguj</button>
 </div>
