@@ -1,5 +1,13 @@
 <div class="button-row">
+  <button mat-flat-buttonpgadmin="homeClick()">Strona główna</button>
   <button mat-flat-button>Przeglądaj zamówienia</button>
-  <button mat-flat-button>Rejestracja</button>
-  <button mat-flat-button>Logowanie</button>
+  <div *ngIf="loggedIn; then loggedInBlock else notLoggedInBlock"></div>
+  <div #notLoggedInBlock>
+    <button mat-flat-button>Rejestracja</button>
+    <button mat-flat-button>Logowanie</button>
+  </div>
+  <div #loggedInBlock>
+    <button mat-flat-button>Moje Zamówienia</button>
+    <button mat-flat-button>Wyloguj</button>
+  </div>
 </div>

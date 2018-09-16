@@ -3,6 +3,7 @@ package pl.edu.agh.tai.application.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.edu.agh.tai.application.dto.client.user.ObservingDTO;
 import pl.edu.agh.tai.application.dto.client.user.UserCreationDTO;
 import pl.edu.agh.tai.application.dto.client.user.UserDTO;
 import pl.edu.agh.tai.application.service.UserService;
@@ -56,5 +57,9 @@ public class UserController {
         return ResponseEntity.ok(userService.getObserving(userId));
     }
 
-
+    @PutMapping("/{userId}/observing")
+    public ResponseEntity<?> updateObserving(@PathVariable long userId, @RequestBody ObservingDTO observingDTO) {
+        userService.updateObserving(userId, observingDTO);
+        return ResponseEntity.ok().build();
+    }
 }

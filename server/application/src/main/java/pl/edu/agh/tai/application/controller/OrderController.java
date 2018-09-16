@@ -24,8 +24,6 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-
-    @CrossOrigin("*")
     @GetMapping(ApiConstants.ORDERS)
     public ResponseEntity<?> getOrders(@RequestParam(value = ApiConstants.PAGE_VAR) Integer page,
                                        @RequestParam(value = ApiConstants.SIZE_VAR) Integer size,

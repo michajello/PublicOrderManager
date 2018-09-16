@@ -60,7 +60,7 @@ public class ScheduledTasks {
     }
 
 //    @Scheduled(fixedDelay = 5000)
-   @Scheduled(cron = "0 57 16 * * *")
+   @Scheduled(cron = "0 51 17 * * *")
     protected void downloadDataFromSejmometrServerAndUpdateDatabase() {
         logger.info("SEJMOMETR -  Init task -  downloading data .");
 
