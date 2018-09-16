@@ -22,6 +22,8 @@ export class OrdersComponent implements OnInit {
   orderKind: number;
   orderMode: number;
   orderType: number;
+  minEstimatedPrice: number;
+  maxEstimatedPrice: number;
 
   constructor(private apiService: ApiService) {
     this.pageOffset = 1;
@@ -36,6 +38,8 @@ export class OrdersComponent implements OnInit {
     this.pageSize = this.pageSize > 100 ? 100 : this.pageSize;
     this.startDate = this.startDateStr != null ? new Date(this.startDateStr) : null;
     this.finishDate = this.endDateStr != null ? new Date(this.endDateStr) : null;
+    this.minEstimatedPrice = this.minEstimatedPrice == null || this.minEstimatedPrice < 0 ? 0 : this.minEstimatedPrice;
+    this.maxEstimatedPrice = this.maxEstimatedPrice == null || this.maxEstimatedPrice < 0 ? null : this.maxEstimatedPrice;
     this.getData();
   }
 
@@ -51,9 +55,10 @@ export class OrdersComponent implements OnInit {
 
   private getData(): void {
     this.apiService.getSampleOrders(this.pageOffset, this.pageSize, this.startDate,
-      this.finishDate, this.voivodeship, this.orderKind, this.orderType, this.orderMode).subscribe(orders => {
-      this.simplifiedOrders = orders;
-    });
+      this.finishDate, this.voivodeship, this.orderKind, this.orderType, this.orderMode,
+      this.minEstimatedPrice, this.maxEstimatedPrice).subscribe(orders => {
+        this.simplifiedOrders = orders;
+      });
   }
 
 }

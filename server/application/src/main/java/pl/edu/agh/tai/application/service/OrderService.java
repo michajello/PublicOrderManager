@@ -48,8 +48,10 @@ public class OrderService {
         return new ArrayList<>();
     }
 
-    public List<SimplifiedOrderDto> getOrders(int page, int size, LocalDate startDate, LocalDate finishDate, Integer voivodshipId, Integer orderModeId, Integer orderTypeId, Integer orderKindId) {
-        QueryOrderExecutor queryOrderExecutor = new QueryOrderExecutor(orderRepository, page, size, startDate, finishDate, voivodshipId, orderModeId, orderTypeId, orderKindId);
+    public List<SimplifiedOrderDto> getOrders(int page, int size, LocalDate startDate, LocalDate finishDate,
+                                              Integer voivodshipId, Integer orderModeId, Integer orderTypeId, Integer orderKindId,
+                                              Long minEstimatedPrice, Long maxEstimatedPrice) {
+        QueryOrderExecutor queryOrderExecutor = new QueryOrderExecutor(orderRepository, page, size, startDate, finishDate, voivodshipId, orderModeId, orderTypeId, orderKindId, minEstimatedPrice, maxEstimatedPrice);
         List<Order> orders = queryOrderExecutor.performQuery();
         return orders.stream()
                 .map(simplifiedOrderMapper::orderToSimplifiedOrderDto)
