@@ -1,6 +1,7 @@
-<tr  style="background-color: #F5F5F5"   *ngIf="simplifiedOrder" (click)="onSelect()">
+<tr  style="background-color: #F5F5F5"   *ngIf="simplifiedOrder">
+  <td class="col-1"><div *ngIf="authService.loggedIn"><mat-checkbox #checkbox (click)="onCheckboxClick(simplifiedOrder.id, checkbox.checked)"></mat-checkbox></div></td>
   <td class="col-2">{{ simplifiedOrder.data_publikacji_zamowienia }}</td>
-  <td class="col-4">{{ simplifiedOrder.nazwa.substr(0,30) + '...'}}</td>
+  <td class="col-2">{{ simplifiedOrder.nazwa.substr(0,30) + '...'}}</td>
   <!-- <td class="col-3">{{ simplifiedOrder.termin }}</td> -->
   <td class="col-1">{{ simplifiedOrder['zamowienia_publiczne_tryby.nazwa'] }}</td>
   <td class="col-1">{{ simplifiedOrder['zamowienia_publiczne_typy.nazwa'] }}</td>
@@ -8,8 +9,7 @@
   <td class="col-1">{{ simplifiedOrder.wartosc_cena_min }}</td>
   <td class="col-1">{{ simplifiedOrder.wartosc_szacowana }}</td>
   <td class="col-1">{{ simplifiedOrder.rodzaje_nazwa }}</td>
-
-
+  <td class="col-1"><button mat-flat-button (click)="onSelect()">Szczegóły</button></td>
 
 </tr>
 <div *ngIf=detailsDisplayed class="tab-content">

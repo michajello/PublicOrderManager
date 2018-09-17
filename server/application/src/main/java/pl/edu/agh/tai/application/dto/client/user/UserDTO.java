@@ -14,6 +14,6 @@ public class UserDTO {
     private long id;
     private String username;
     private String email;
-    private List<Order> observing = new ArrayList<>();
+    private List<Long> observing = new ArrayList<>();
 
 }

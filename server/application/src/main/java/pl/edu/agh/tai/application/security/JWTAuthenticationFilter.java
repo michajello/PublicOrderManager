@@ -8,6 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import pl.edu.agh.tai.application.exception.MissingDataException;
+import pl.edu.agh.tai.application.service.UserService;
+import pl.edu.agh.tai.dbmodel.repository.UserRepository;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -25,9 +28,11 @@ import static pl.edu.agh.tai.application.security.SecurityConstants.SECRET;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
+    private UserRepository userRepository;
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager, UserRepository userRepository) {
         this.authenticationManager = authenticationManager;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -53,10 +58,16 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             HttpServletResponse res,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
+        String username = ((User) (auth.getPrincipal())).getUsername();
+        Long id = userRepository.findByUsername(username)
+            .orElseThrow(() -> new MissingDataException("No user with name" + username))
+            .getId();
         String token = JWT.create()
             .withSubject(((User) auth.getPrincipal()).getUsername())
             .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+            .withClaim("id", id)
             .sign(HMAC512(SECRET.getBytes()));
         res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
+        res.addHeader("Access-Control-Expose-Headers", "Authorization");
     }
 }

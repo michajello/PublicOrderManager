@@ -15,6 +15,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import pl.edu.agh.tai.application.util.ApiConstants;
+import pl.edu.agh.tai.dbmodel.repository.UserRepository;
 
 import static pl.edu.agh.tai.application.security.SecurityConstants.LOGIN_URL;
 
@@ -23,10 +24,12 @@ import static pl.edu.agh.tai.application.security.SecurityConstants.LOGIN_URL;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsService userDetailsService;
+    private UserRepository userRepository;
 
     @Autowired
-    public SecurityConfig(UserDetailsService userDetailsService) {
+    public SecurityConfig(UserDetailsService userDetailsService, UserRepository userRepository) {
         this.userDetailsService = userDetailsService;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -37,7 +40,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             antMatchers(HttpMethod.POST, LOGIN_URL).permitAll().
             anyRequest().authenticated().
             and().
-            addFilter(new JWTAuthenticationFilter(authenticationManager())).
+            addFilter(new JWTAuthenticationFilter(authenticationManager(), userRepository)).
             addFilter(new JWTAuthorizationFilter(authenticationManager())).
             // this disables session creation on Spring Security
             sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

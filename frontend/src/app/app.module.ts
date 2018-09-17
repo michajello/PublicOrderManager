@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
+import {MatCheckboxModule} from '@angular/material';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ApiService } from './services/api.service';
@@ -36,7 +37,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     RouterModule.forRoot(appRoutes, {enableTracing: true}),
-    BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, MatButtonModule
+    BrowserModule, HttpClientModule, FormsModule, BrowserAnimationsModule, MatButtonModule, MatCheckboxModule
   ],
   providers: [ApiService, AuthService],
   bootstrap: [AppComponent, OrderItemComponent, NavBarComponent]

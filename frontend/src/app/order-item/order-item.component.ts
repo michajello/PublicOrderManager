@@ -3,6 +3,7 @@ import { SimplifiedOrder } from '../model/SimplifiedOrder';
 import { ApiService } from '../services/api.service';
 import { OrderSejmometr } from '../model/OrderSejmometr';
 import { OrderDetails } from '../model/OrderDetailsSejmometr';
+import {AuthService} from '../services/auth.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class OrderItemComponent implements OnInit {
   orderDetails: OrderDetails ;
   detailsDisplayed: Boolean;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, public authService: AuthService) {
     this.detailsDisplayed = false;
   }
 
@@ -33,4 +34,11 @@ export class OrderItemComponent implements OnInit {
     this.detailsDisplayed === false ? this.detailsDisplayed = true : this.detailsDisplayed = false;
   }
 
+  onCheckboxClick(id: number, checked: boolean) {
+    if (checked) {
+      this.authService.addToObserving(id);
+    } else {
+      this.authService.removeFromObserving(id);
+    }
+  }
 }

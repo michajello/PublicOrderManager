@@ -56,11 +56,6 @@ public class UserService {
         userRepository.delete(user);
     }
 
-    public UserDTO updateUser(long userId, UserDTO userDTO){
-        User user = findUser(userId);
-        user.update(userMapper.userDTOToUser(userDTO));
-        return userMapper.userToUserDTO(userRepository.save(user));
-    }
 
     public List<SimplifiedOrderDto> getObserving(long userId) {
         User user = findUser(userId);
@@ -81,5 +76,14 @@ public class UserService {
                 .collect(Collectors.toList());
         user.setObserving(observing);
         userRepository.save(user);
+    }
+
+    public Long getUserId(String username) {
+        User user = findUser(username);
+        return user.getId();
+    }
+
+    private User findUser(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new MissingDataException("No user with name" + username));
     }
 }

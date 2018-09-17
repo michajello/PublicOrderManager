@@ -1,3 +1,18 @@
-<p>
-  register-page works!
-</p>
+<div class="login-page">
+  <form>
+    <div class="form-group">
+      <label>Nazwa użytkownika</label>
+      <input #username type="text" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input #email type="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+      <label>Hasło</label>
+      <input #password type="password" class="form-control" required>
+    </div>
+    <button (click)="register(username.value, email.value, password.value)">Rejestracja</button>
+    <label>{{label}}</label>
+  </form>
+</div>
