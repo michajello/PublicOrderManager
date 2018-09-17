@@ -8,7 +8,6 @@ import {AuthService} from '../services/auth.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-  loggedIn: Boolean = false;
 
   constructor(private router: Router, public authService: AuthService) { }
 
@@ -32,7 +31,7 @@ export class NavBarComponent implements OnInit {
   }
 
   myOrders() {
-
+    this.router.navigateByUrl('/myorders');
   }
 
   logout() {

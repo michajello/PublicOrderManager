@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import {User} from '../model/User';
 import { JwtHelperService} from '@auth0/angular-jwt';
 import {Observable} from 'rxjs';
+import {SimplifiedOrder} from '../model/SimplifiedOrder';
 
 const AUTH_PATH = '/login';
 const helper = new JwtHelperService();
@@ -67,6 +68,12 @@ export class AuthService {
         if (resp.ok) {
           console.log('ok');
         }
+    });
+  }
+  public getUserObserving() {
+    return this.http.get<SimplifiedOrder[]>(environment.SERVER_URL + /users/ + this.user.id + '/observing', {
+      headers: new HttpHeaders({'Authorization': this.jwt}),
+      observe: 'response'
     });
   }
 }
