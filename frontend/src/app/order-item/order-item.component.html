@@ -1,5 +1,5 @@
 <tr  style="background-color: #F5F5F5"   *ngIf="simplifiedOrder">
-  <td class="col-1"><div *ngIf="authService.loggedIn"><mat-checkbox #checkbox (click)="onCheckboxClick(simplifiedOrder.id, checkbox.checked)"></mat-checkbox></div></td>
+  <td class="col-1"><div *ngIf="authService.loggedIn"><mat-checkbox #checkbox [checked]="checked" (change)="onCheckboxClick(simplifiedOrder.id, checked)"></mat-checkbox></div></td>
   <td class="col-2">{{ simplifiedOrder.data_publikacji_zamowienia }}</td>
   <td class="col-2">{{ simplifiedOrder.nazwa.substr(0,30) + '...'}}</td>
   <!-- <td class="col-3">{{ simplifiedOrder.termin }}</td> -->

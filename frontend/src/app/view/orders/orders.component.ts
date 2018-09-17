@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { SimplifiedOrder } from '../../model/SimplifiedOrder';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-orders',
@@ -25,7 +26,7 @@ export class OrdersComponent implements OnInit {
   minEstimatedPrice: number;
   maxEstimatedPrice: number;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, public authService: AuthService) {
     this.pageOffset = 1;
     this.pageSize = 20;
   }

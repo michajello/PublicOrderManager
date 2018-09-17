@@ -12,6 +12,7 @@ import pl.edu.agh.tai.dbmodel.entity.User;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(ApiConstants.USERS)
 public class UserController {

@@ -14,6 +14,7 @@ import {AuthService} from '../services/auth.service';
 })
 export class OrderItemComponent implements OnInit {
   @Input() simplifiedOrder: SimplifiedOrder;
+  @Input() checked: boolean;
 
   orderDetails: OrderDetails ;
   detailsDisplayed: Boolean;
@@ -35,7 +36,7 @@ export class OrderItemComponent implements OnInit {
   }
 
   onCheckboxClick(id: number, checked: boolean) {
-    if (checked) {
+    if (!checked) {
       this.authService.addToObserving(id);
     } else {
       this.authService.removeFromObserving(id);

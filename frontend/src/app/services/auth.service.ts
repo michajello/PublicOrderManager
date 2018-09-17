@@ -57,14 +57,13 @@ export class AuthService {
     this.user.observing.push(id);
   }
   public saveObserving() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': this.jwt
-      }),
-      response: 'observe'
-    };
-    this.http.put<any>(environment.SERVER_URL + '/users/' + this.user.id + '/observing',
-      {observing: this.user.observing}, httpOptions).subscribe( resp => {
+    this.http.put(
+      environment.SERVER_URL + '/users/' + this.user.id + '/observing',
+      {'observing': this.user.observing}, {
+        headers: new HttpHeaders({'Authorization': this.jwt}),
+        observe: 'response'
+      }
+    ).subscribe( resp => {
         if (resp.ok) {
           console.log('ok');
         }

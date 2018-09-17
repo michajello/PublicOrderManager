@@ -84,7 +84,6 @@
       <input class="btn btn-primary" type="submit" (click)="onClickForm()" value="Zatwierdź">
     </form>
   </div>
-
   <p *ngIf="pageOffset>1"><span class="glyphicon glyphicon-arrow-left"></span></p>
   <p (click)="onClickNext()"><span class="glyphicon glyphicon-arrow-right"></span></p>
   <nav aria-label="Page navigation example">
@@ -107,10 +106,12 @@
   <table class="table table-striped">
     <tbody>
       <ng-container *ngFor="let order of simplifiedOrders">
-        <app-order-item [simplifiedOrder]="order"></app-order-item>
+        <app-order-item [checked]="authService.loggedIn && authService.user.observing.includes(order.id)" [simplifiedOrder]="order"></app-order-item>
       </ng-container>
     </tbody>
-
+    <tfoot>
+      <button mat-flat-button *ngIf="authService.loggedIn" (click)="authService.saveObserving()">Zapisz zmiany</button>
+    </tfoot>
   </table>
 
 
